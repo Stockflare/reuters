@@ -1,0 +1,11 @@
+inherit_from:
+  - .rubocop.enabled.yml
+
+# Common configuration.
+AllCops:
+  Exclude:
+    - '**/*.gemspec'
+    - 'vendor/**'
+    - 'spec/**'
+    - 'script/**'
+  RunRailsCops: true

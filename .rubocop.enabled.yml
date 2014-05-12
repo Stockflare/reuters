@@ -1,0 +1,23 @@
+TrailingBlankLines:
+  Description: 'Checks trailing blank lines and final newline.'
+  Enabled: false
+
+EmptyLinesAroundBody:
+  Description: "Keeps track of empty lines around expression bodies."
+  Enabled: false
+
+CaseEquality:
+  Description: 'Avoid explicit use of the case equality operator(===).'
+  Enabled: false
+
+ClassVars:
+  Description: 'Avoid the use of class variables.'
+  Enabled: false
+
+IndentationConsistency:
+  Description: 'Keep indentation straight.'
+  Enabled: false
+
+AccessModifierIndentation:
+  Description: Check indentation of private/protected visibility modifiers.
+  Enabled: true

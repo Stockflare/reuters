@@ -1,4 +1,4 @@
-Copyright (c) 2014 davidkelley
+Copyright (c) 2014 Stockflare Ltd.
 
 MIT License
 

@@ -4,6 +4,7 @@ CodeClimate::TestReporter.start
 require 'coveralls'
 Coveralls.wear!
 
+require "savon/mock/spec_helper"
 require 'factory_girl'
 require 'reuters'
 

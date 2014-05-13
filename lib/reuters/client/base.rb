@@ -10,29 +10,26 @@ module Reuters
 
       delegate :action, to: :namespace
 
+      delegate :action_endpoint, to: :namespace
+
       delegate :operations, to: :client
 
       def client
-        Savon.client(
-          wsdl: wsdl.endpoint,
-          soap_version: 2,
-          log: false,
-          namespaces: {
-            'xmlns:n0' => namespace.endpoint,
-            'xmlns:n1' => common.endpoint,
-            'xmlns:adr' => 'http://www.w3.org/2005/08/addressing'
-          }
-        )
+        Savon.client options
       end
 
-      def request(type, action, opts = {}, &block)
-        client.request type, action, opts do
-          yield if block
-        end
+      def request(type, opts = {}, &block)
+        client.call type, opts.deep_merge(
+          attributes: { "xmlns" => namespace.endpoint }
+        )
       end
 
       def namespace
         Reuters::Namespaces.const_get client_name
+      end
+
+      def wsdl
+        Reuters::Wsdls.const_get client_name
       end
 
       private
@@ -45,8 +42,13 @@ module Reuters
         Reuters::Namespaces::Common
       end
 
-      def wsdl
-        Reuters::Wsdls.const_get client_name
+      def options
+        {
+          wsdl: wsdl.endpoint,
+          ssl_version: :SSLv3,
+          namespace_identifier: nil,
+          ssl_verify_mode: :none
+        }
       end
 
     end

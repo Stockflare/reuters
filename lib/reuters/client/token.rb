@@ -32,27 +32,26 @@ module Reuters
       # @option creds [String] :app_id   Application ID to be used.
       #
       # @return [Token] an initialized instance of {Token}
-      def authenticate(creds = {})
-        response = request :n0, action(:create_service_token) do
-          soap.header = {
-            'adr:To' => soap.endpoint,
-            'adr:Action' => "#{Reuters.namespaces_endpoint}/TokenManagement_1/CreateServiceToken_1"
-          }
+      def authenticate(creds = Reuters::Credentials.to_h)
 
-          soap.body = {
-            'n1:ApplicationID' => creds[:app_id],
-            'n0:Username' => creds[:username],
-            'n0:Password' => creds[:password]
+        message = {
+          'ApplicationID' => creds[:app_id],
+          'Username' => creds[:username],
+          'Password' => creds[:password],
+          :attributes! => {
+            'ApplicationID' => {
+              'xmlns' => common.endpoint
+            }
           }
-        end
+        }
+
+        response = request :create_service_token_1, message: message
+
+        puts response.inspect
 
         @token = response[:create_service_token_response_1][:token]
         @expires_at = response[:create_service_token_response_1][:expiration]
 
-      end
-
-      def self.wsdl
-        "#{Reuters.wsdl_endpoint}/..."
       end
 
     end

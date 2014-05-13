@@ -1,6 +1,8 @@
 require 'savon'
+
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/module/delegation'
+require 'active_support/core_ext/hash/deep_merge'
 
 require 'reuters/namespaces'
 require 'reuters/wsdls'
@@ -28,7 +30,7 @@ module Reuters
   self.namespaces_endpoint = 'http://www.reuters.com/ns/2006/05/01/webservices/rkd'
 
   mattr_accessor :wsdl_endpoint
-  self.wsdl_endpoint = 'http://api.rkd.reuters.com/schemas/wsdl'
+  self.wsdl_endpoint = 'http://api.rkd.reuters.com/schemas/'
 
   # Helper to configure the Reuters gem.
   #

@@ -8,10 +8,6 @@ module Reuters
     # Reuter's API and handling the resulting token provided.
     class Base
 
-      delegate :action, to: :namespace
-
-      delegate :action_endpoint, to: :namespace
-
       delegate :operations, to: :client
 
       def client

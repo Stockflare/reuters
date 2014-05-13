@@ -9,7 +9,6 @@ shared_examples "a client class" do
   it { should respond_to(:client) }
   it { should respond_to(:namespace) }
   it { should respond_to(:wsdl) }
-  it { should respond_to(:action) }
   it { should respond_to(:operations) }
 
   # describe "when #request is called" do

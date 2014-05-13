@@ -6,6 +6,8 @@ module Reuters
     # it provides useful helpers.
     module Base
 
+      # Class based methods that are set in every
+      # module that includes this base module.
       module ClassMethods
 
         def endpoint

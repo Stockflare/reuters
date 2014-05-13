@@ -8,4 +8,10 @@ describe Reuters::Client::Token do
 
   it_behaves_like "a client class"
 
+  describe "authenticating" do
+
+    pending
+
+  end
+
 end

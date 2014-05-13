@@ -8,9 +8,7 @@ shared_examples "a namespace module" do
   it { should respond_to(:configure) }
   it { should respond_to(:action_namespace) }
 
-  it "should be configurable" do
-    expect { |b| subject.configure &b }.to yield_with_args(subject)
-  end
+  it_behaves_like "a configurable class"
 
   it "should enable actions to be configurable" do
     expect { |b| subject.actions &b }.to yield_with_args(subject::Actions)

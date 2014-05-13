@@ -4,7 +4,7 @@ module Reuters
 
       module ClassMethods
         def endpoint
-          "#{Reuters.wsdl_endpoint}/#{self.name}/#{self.method}"  
+          "#{Reuters.wsdl_endpoint}/#{self.name}/wsdl/#{self.method}"  
         end
         def configure
           yield self

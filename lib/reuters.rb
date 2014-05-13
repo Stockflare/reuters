@@ -1,8 +1,10 @@
 require 'savon'
+require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/module/delegation'
 
+require 'reuters/namespaces'
 require 'reuters/credentials'
 require 'reuters/version'
-require 'reuters/config'
 require 'reuters/client'
 
 # Ruby Gem for interacting with the Thomson Reuters
@@ -21,20 +23,11 @@ require 'reuters/client'
 #   end
 module Reuters
 
-  # Configure Savon gem to use the correct version of SOAP
-  # and to avoid logging.
-  Savon.configure do |config|
-    config.soap_version = 2
-    config.log = false
-  end
-
-  # Set the Namespaces Endpoint
   mattr_accessor :namespaces_endpoint
-  @@namespaces_endpoint = 'http://www.reuters.com/ns/2006/05/01'
+  self.namespaces_endpoint = 'http://www.reuters.com/ns/2006/05/01/webservices/rkd'
 
-  # Set the WSDL Endpoint to use to contact the Reuter's API.
   mattr_accessor :wsdl_endpoint
-  @@wsdl_endpoint = 'http://api.rkd.reuters.com/schemas/wsdl'
+  self.wsdl_endpoint = 'http://api.rkd.reuters.com/schemas/wsdl'
 
   # Helper to configure the Reuters gem.
   #

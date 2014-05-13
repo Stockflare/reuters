@@ -22,7 +22,7 @@ module Reuters
 
       attr_reader :expires_at
 
-      # Initializes a new instance of {Token} and automatically
+      # Authenticates with Reuters and automatically
       # attempts to retieve a new token from the Reuter's API.
       #
       # @param [Hash] creds to be used to authenticate.
@@ -32,7 +32,7 @@ module Reuters
       # @option creds [String] :app_id   Application ID to be used.
       #
       # @return [Token] an initialized instance of {Token}
-      def initialize(creds = {})
+      def authenticate(creds = {})
         response = request :n0, action(:create_service_token) do
           soap.header = {
             'adr:To' => soap.endpoint,

@@ -8,44 +8,46 @@ module Reuters
     # Reuter's API and handling the resulting token provided.
     class Base
 
-    def request(type, action, opts = {}, &block)
-      client.request type, action, opts do
-        yield if block
+      delegate :action, to: :namespace
+
+      delegate :operations, to: :client
+
+      def client
+        Savon.client(
+          wsdl: wsdl.endpoint,
+          soap_version: 2,
+          log: false,
+          namespaces: {
+            'xmlns:n0' => namespace.endpoint,
+            'xmlns:n1' => common.endpoint,
+            'xmlns:adr' => 'http://www.w3.org/2005/08/addressing'
+          }
+        )
       end
-    end
 
-    delegate :namespace, to: :ns
+      def request(type, action, opts = {}, &block)
+        client.request type, action, opts do
+          yield if block
+        end
+      end
 
-    delegate :action, to: :ns
+      def namespace
+        Reuters::Namespaces.const_get client_name
+      end
 
-    delegate :operations, to: :client
+      private
 
-    private
+      def client_name
+        self.class.name.demodulize
+      end
 
-    def client
-      Savon::Client(
-        wsdl: wsdl,
-        soap_version: 2,
-        log: false,
-        namespaces: {
-          'xmlns:n0' => namespace,
-          'xmlns:n1' => common,
-          'xmlns:adr' => 'http://www.w3.org/2005/08/addressing'
-        }
-      )
-    end
+      def common
+        Reuters::Namespaces::Common
+      end
 
-    def common
-      "#{Reuters.namespaces_endpoint}/#{Reuters::Namespaces::Common.name}"
-    end
-
-    def self.wsdl
-      nil
-    end
-
-    def ns
-      Reuters::Namespaces.const_get(self.class.name)
-    end
+      def wsdl
+        Reuters::Wsdls.const_get client_name
+      end
 
     end
   end

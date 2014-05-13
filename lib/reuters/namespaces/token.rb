@@ -5,10 +5,18 @@ module Reuters
     # are used to authenticate.
     module Token
 
-      # Namespace for the TokenManagement endpoint.
-      mattr_accessor :management
-      @@management = 'webservices/rkd/TokenManagement_1'
+      include Base
 
+      # Namespace for the TokenManagement endpoint.
+      mattr_accessor :name
+      self.name = 'TokenManagement_1'
+
+      module Actions
+
+        mattr_accessor :create_service_token
+        self.create_service_token = 'CreateServiceToken_Request_1'
+
+      end
 
     end
   end

@@ -4,9 +4,10 @@ module Reuters
     # a common set of Namespaces present.
     module Common
 
-      mattr_accessor :common
-      @@common = 'webservices/rkd/Common_1'
+      include Base
 
+      mattr_accessor :name
+      self.name = 'Common_1'
 
     end
   end

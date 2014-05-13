@@ -9,6 +9,15 @@ module Reuters
         def action(key)
           self::Actions.send(key)
         end
+        def action_namespace(key)
+          "#{namespace}/#{action(key)}"
+        end
+        def configure
+          yield self
+        end
+        def actions
+          yield self::Actions
+        end
       end
 
       extend ClassMethods

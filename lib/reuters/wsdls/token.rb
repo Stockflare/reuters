@@ -5,6 +5,8 @@ module Reuters
     # performed to retrieve access tokens.
     module Token
 
+      # @!parse include Base
+
       include Base
 
       # Wsdl for the TokenManagement endpoint.

@@ -5,6 +5,8 @@ module Reuters
     # are used to authenticate.
     module Token
 
+      # @!parse include Base
+
       include Base
 
       # Namespace for the TokenManagement endpoint.

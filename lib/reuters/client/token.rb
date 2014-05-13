@@ -38,11 +38,8 @@ module Reuters
           'ApplicationID' => creds[:app_id],
           'Username' => creds[:username],
           'Password' => creds[:password],
-          :attributes! => {
-            'ApplicationID' => {
-              'xmlns' => common.endpoint
-            }
-          }
+          # Lovely little hack here from Savon...
+          :attributes! => { 'ApplicationID' => { 'xmlns' => common.endpoint } }
         }
 
         response = request :create_service_token_1, message: message

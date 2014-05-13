@@ -14,14 +14,22 @@ module Reuters
           "#{Reuters.wsdl_endpoint}/#{name}/wsdl/#{method}"
         end
 
+        # Enables this WSDL to be configured by passing in
+        # itself as a block which enables static variables to
+        # be set.
+        #
+        # @yield [config] The WSDL to be configured.
         def configure
           yield self
         end
 
       end
 
+      # @!parse extend ClassMethods
       extend ClassMethods
 
+      # Extend the including class with the defined
+      # class methods.
       def self.included(klass)
         klass.extend(ClassMethods)
       end

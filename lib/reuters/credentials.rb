@@ -58,10 +58,18 @@ module Reuters
       yield @@username, @@password, @@app_id
     end
 
+    # Returns credentials that have been configured as a Hash.
+    #
+    # @return [Hash] the credentials that have been configured.
     def self.to_h
       { username: username, password: password, app_id: app_id }
     end
 
+    # Enables credentials to be configured by passing in
+    # itself as a block which enables static variables to
+    # be set.
+    #
+    # @yield [config] The credentials to be configured.
     def self.configure
       yield self
     end

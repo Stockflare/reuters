@@ -5,6 +5,8 @@ module Reuters
     # API requests.
     module Common
 
+      # @!parse include Base
+
       include Base
 
       mattr_accessor :name

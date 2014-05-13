@@ -9,3 +9,6 @@ AllCops:
     - 'spec/**/*'
     - 'script/**/*'
   RunRailsCops: true
+
+LineLength:
+  Max: 100

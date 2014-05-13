@@ -58,6 +58,10 @@ module Reuters
       yield @@username, @@password, @@app_id
     end
 
+    def self.configure
+      yield self
+    end
+
   end
 
 end

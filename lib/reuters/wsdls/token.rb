@@ -1,5 +1,8 @@
 module Reuters
   module Wsdls
+    # Represents the WSDL used by Reuters in their internal API for
+    # providing information related to the operations that can be
+    # performed to retrieve access tokens.
     module Token
 
       include Base

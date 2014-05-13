@@ -10,21 +10,41 @@ module Reuters
 
     def request(type, action, opts = {}, &block)
       client.request type, action, opts do
-        soap.namespaces["xmlns:n0"]  = self.namespace
-        soap.namespaces["xmlns:n1"]  = self.common
-        soap.namespaces["xmlns:adr"] = "http://www.w3.org/2005/08/addressing"
         yield if block
       end
     end
 
+    delegate :namespace, to: :ns
+
+    delegate :action, to: :ns
+
+    delegate :operations, to: :client
+
     private
 
     def client
-      Savon::Client.new self.wsdl
+      Savon::Client(
+        wsdl: wsdl,
+        soap_version: 2,
+        log: false,
+        namespaces: {
+          'xmlns:n0' => namespace,
+          'xmlns:n1' => common,
+          'xmlns:adr' => 'http://www.w3.org/2005/08/addressing'
+        }
+      )
     end
 
     def common
-      "#{Reuters.namespaces_endpoint}/#{Reuters::Namespaces::Token.management}"
+      "#{Reuters.namespaces_endpoint}/#{Reuters::Namespaces::Common.name}"
+    end
+
+    def self.wsdl
+      nil
+    end
+
+    def ns
+      Reuters::Namespaces.const_get(self.class.name)
     end
 
     end

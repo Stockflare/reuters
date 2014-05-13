@@ -12,12 +12,11 @@ module Reuters
     # Configure a Namespaces stored configurations.
     #
     # @note The passed in namespace is converted to a string
-    #   and capitalized. Ensure that the namespace is in
-    #   singular form.
+    #   and capitalized. It should be in the correct form.
     #
     # @param [Symbol] namespace to configure endpoints for.
-    def self.configure(namespace)
-      yield get_const(namespace.to_s.capitalize)
+    def self.configure(namespace, &block)
+      const_get(namespace.to_s).configure &block
     end
 
   end

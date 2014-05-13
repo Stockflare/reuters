@@ -38,13 +38,13 @@ module Reuters
     #     none is set.
 
     mattr_accessor :username
-    @@username = nil
+    self.username = nil
 
     mattr_accessor :password
-    @@password = nil
+    self.password = nil
 
     mattr_accessor :app_id
-    @@app_id = nil
+    self.app_id = nil
 
     # Yields the configured credentials to connect to the
     # Reuter's API with.
@@ -56,6 +56,10 @@ module Reuters
     # @yieldparam [String, Nil] app_id configured, or nil if one is not set.
     def self.details
       yield @@username, @@password, @@app_id
+    end
+
+    def self.to_h
+      { username: self.username, password: self.password, app_id: self.app_id }
     end
 
     def self.configure

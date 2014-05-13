@@ -53,4 +53,16 @@ describe Reuters::Credentials do
 
   end
 
+  describe "return value of #to_h" do
+
+    it "should be a hash" do
+      expect(subject.to_h).to be_a(Hash)
+    end
+
+    it "should include credentials" do
+      expect(subject.to_h).to include(:username, :password, :app_id)
+    end
+
+  end
+
 end

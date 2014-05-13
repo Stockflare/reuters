@@ -2,11 +2,11 @@ shared_examples "a namespace module" do
 
   it { should respond_to(:name) }
   it { should respond_to(:name=) }
-  it { should respond_to(:namespace) }
+  it { should respond_to(:endpoint) }
   it { should respond_to(:action) }
   it { should respond_to(:actions) }
   it { should respond_to(:configure) }
-  it { should respond_to(:action_namespace) }
+  it { should respond_to(:action_endpoint) }
 
   it_behaves_like "a configurable class"
 
@@ -18,8 +18,8 @@ shared_examples "a namespace module" do
     expect(subject.constants).to include(:Actions)
   end
 
-  it "#namespace should return a fully resolved namespace name" do
-    expect(subject.namespace).to include(Reuters.namespaces_endpoint)
+  it "#endpoint should return a fully resolved endpoint name" do
+    expect(subject.endpoint).to include(Reuters.namespaces_endpoint)
   end
 
   describe "the shared Actions of a Namespace" do
@@ -54,7 +54,7 @@ shared_examples "a namespace module" do
       end
 
       it "should retrieve a fully resolved action" do
-        expect(subject.action_namespace(:test)).to include(Reuters.namespaces_endpoint) 
+        expect(subject.action_endpoint(:test)).to include(Reuters.namespaces_endpoint) 
       end
 
     end

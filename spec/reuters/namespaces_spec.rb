@@ -20,4 +20,12 @@ describe Reuters::Namespaces do
 
   end
 
+  describe "when a namespace is not defined" do
+
+    it "should raise an error" do
+      expect { |b| subject.configure("FuddyWsdl", &b) }.to raise_error
+    end
+
+  end
+
 end

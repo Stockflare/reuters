@@ -3,14 +3,14 @@ module Reuters
     module Base
 
       module ClassMethods
-        def namespace
+        def endpoint
           "#{Reuters.namespaces_endpoint}/#{self.name}"  
         end
         def action(key)
           self::Actions.send(key)
         end
-        def action_namespace(key)
-          "#{namespace}/#{action(key)}"
+        def action_endpoint(key)
+          "#{endpoint}/#{action(key)}"
         end
         def configure
           yield self

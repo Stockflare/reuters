@@ -3,6 +3,7 @@ require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/module/delegation'
 
 require 'reuters/namespaces'
+require 'reuters/wsdls'
 require 'reuters/credentials'
 require 'reuters/version'
 require 'reuters/client'

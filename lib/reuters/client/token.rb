@@ -15,7 +15,8 @@ module Reuters
 
       # @!attribute [r] expires_at
       #   The timestamp at which the associated token will expire.
-      #   @return [Integer, Nil] the expiry time of the token, or nil if not set.
+      #   @return [Integer, Nil] the expiry time of the token,
+      #     or nil if not set.
 
       attr_reader :token
 
@@ -32,19 +33,17 @@ module Reuters
       #
       # @return [Token] an initialized instance of {Token}
       def initialize(creds = {})
-        response = request :n0, "CreateServiceToken_Request_1" do
+        response = request :n0, action(:create_service_token) do
           soap.header = {
-            "adr:To": soap.endpoint,
-            "adr:Action": "#{Reuters.namespaces_endpoint}/webservices/rkd/TokenManagement_1/CreateServiceToken_1"
+            'adr:To' => soap.endpoint,
+            'adr:Action' => "#{Reuters.namespaces_endpoint}/TokenManagement_1/CreateServiceToken_1"
           }
 
-          Reuters::Credentials.details do |user, pass, app|
-            soap.body = {
-              "n1:ApplicationID": app,
-              "n0:Username": user,
-              "n0:Password": pass,
-            }
-          end
+          soap.body = {
+            'n1:ApplicationID' => creds[:app_id],
+            'n0:Username' => creds[:username],
+            'n0:Password' => creds[:password]
+          }
         end
 
         @token = response[:create_service_token_response_1][:token]
@@ -54,10 +53,6 @@ module Reuters
 
       def self.wsdl
         "#{Reuters.wsdl_endpoint}/..."
-      end
-
-      def self.namespace
-        "#{Reuters.namespaces_endpoint}/#{Reuters::Namespaces::Token.management}"
       end
 
     end

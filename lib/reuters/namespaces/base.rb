@@ -6,6 +6,9 @@ module Reuters
         def namespace
           "#{Reuters.namespaces_endpoint}/#{self.name}"  
         end
+        def action(key)
+          self::Actions.send(key)
+        end
       end
 
       extend ClassMethods

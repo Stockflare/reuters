@@ -3,6 +3,7 @@ shared_examples "a namespace module" do
   it { should respond_to(:name) }
   it { should respond_to(:name=) }
   it { should respond_to(:namespace) }
+  it { should respond_to(:action) }
 
   it "should include namespace actions" do
     expect(subject.constants).to include(:Actions)
@@ -31,6 +32,12 @@ shared_examples "a namespace module" do
 
     it "should modify the value" do
       expect { subject::Actions.test = 1 }.to change { subject::Actions.test }
+    end
+
+    it "should retrieve an action" do
+      test_val = "foobar"
+      subject::Actions.test = test_val
+      expect(subject.action(:test)).to eq test_val
     end
 
   end

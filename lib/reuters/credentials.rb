@@ -59,7 +59,7 @@ module Reuters
     end
 
     def self.to_h
-      { username: self.username, password: self.password, app_id: self.app_id }
+      { username: username, password: password, app_id: app_id }
     end
 
     def self.configure

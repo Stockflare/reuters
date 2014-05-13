@@ -16,7 +16,7 @@ module Reuters
     #
     # @param [Symbol] namespace to configure endpoints for.
     def self.configure(namespace, &block)
-      const_get(namespace.to_s).configure &block
+      const_get(namespace.to_s).configure(&block)
     end
 
   end

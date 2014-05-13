@@ -3,26 +3,32 @@ module Reuters
     module Base
 
       module ClassMethods
+
         def endpoint
-          "#{Reuters.namespaces_endpoint}/#{self.name}"  
+          "#{Reuters.namespaces_endpoint}/#{name}"
         end
+
         def action(key)
           self::Actions.send(key)
         end
+
         def action_endpoint(key)
           "#{endpoint}/#{action(key)}"
         end
+
         def configure
           yield self
         end
+
         def actions
           yield self::Actions
         end
+
       end
 
       extend ClassMethods
 
-      def self.included klass
+      def self.included(klass)
         klass.extend(ClassMethods)
       end
 

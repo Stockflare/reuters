@@ -45,7 +45,7 @@ module Reuters
   #
   # @yield [Reuters::Credentials] Yields the {Credentials} module.
   def self.credentials(&block)
-    self::Credentials.configure &block
+    self::Credentials.configure(&block)
   end
 
 end

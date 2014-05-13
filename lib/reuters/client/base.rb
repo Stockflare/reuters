@@ -18,9 +18,9 @@ module Reuters
         Savon.client options
       end
 
-      def request(type, opts = {}, &block)
+      def request(type, opts = {})
         client.call type, opts.deep_merge(
-          attributes: { "xmlns" => namespace.endpoint }
+          attributes: { 'xmlns' => namespace.endpoint }
         )
       end
 

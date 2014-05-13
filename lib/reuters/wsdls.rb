@@ -4,7 +4,7 @@ require 'reuters/wsdls/token'
 module Reuters
   # The {Wsdls} module contains sets of endpoints that
   # are used by Reuters in their internal API. Wsdls describe
-  # valid operations that can be carried out through API 
+  # valid operations that can be carried out through API
   # requests. Each API group should have an accompanying
   # WSDL, as they are used to make {Client} requests.
   module Wsdls
@@ -16,7 +16,7 @@ module Reuters
     #
     # @param [Symbol] wsdl to configure endpoints for.
     def self.configure(wsdl, &block)
-      const_get(wsdl.to_s).configure &block
+      const_get(wsdl.to_s).configure(&block)
     end
 
   end

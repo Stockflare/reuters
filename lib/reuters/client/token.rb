@@ -47,7 +47,7 @@ module Reuters
 
         response = request :create_service_token_1, message: message
 
-        puts response.inspect
+        # puts response.inspect
 
         @token = response[:create_service_token_response_1][:token]
         @expires_at = response[:create_service_token_response_1][:expiration]

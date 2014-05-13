@@ -3,17 +3,20 @@ module Reuters
     module Base
 
       module ClassMethods
+
         def endpoint
-          "#{Reuters.wsdl_endpoint}/#{self.name}/wsdl/#{self.method}"  
+          "#{Reuters.wsdl_endpoint}/#{name}/wsdl/#{method}"
         end
+
         def configure
           yield self
         end
+
       end
 
       extend ClassMethods
 
-      def self.included klass
+      def self.included(klass)
         klass.extend(ClassMethods)
       end
 

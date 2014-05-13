@@ -37,15 +37,12 @@ module Reuters
     #   @return [String, Nil] The configured appication ID, or nil if
     #     none is set.
 
-    # Set the username to connect with
     mattr_accessor :username
     @@username = nil
 
-    # Set the password to connect with
     mattr_accessor :password
     @@password = nil
 
-    # Set the application ID to use
     mattr_accessor :app_id
     @@app_id = nil
 

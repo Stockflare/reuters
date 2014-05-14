@@ -35,8 +35,14 @@ module Reuters
       def request(type, opts = {})
         response.new client.call(type, opts.deep_merge(
           soap_header: {
-            'ApplicationID' => @token.app_id,
-            'Token' => @token.token
+            'Authorization' => {
+              'ApplicationID' => @token.app_id,
+              'Token' => @token.token  
+            },
+            attributes!: { 'Authorization' => { 
+              'xmlns' => common.endpoint 
+              } 
+            }
           },
           attributes: { 'xmlns' => namespace.endpoint })).body
       end
@@ -87,7 +93,8 @@ module Reuters
           wsdl: wsdl.endpoint,
           ssl_version: :SSLv3,
           namespace_identifier: nil,
-          ssl_verify_mode: :none
+          ssl_verify_mode: :none,
+          log: false
         }
       end
 

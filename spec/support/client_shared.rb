@@ -11,18 +11,6 @@ shared_examples "a client class" do
   it { should respond_to(:wsdl) }
   it { should respond_to(:operations) }
 
-  # describe "when #request is called" do
-
-  #   let(:type) { :type }
-  #   let(:opts) { { message: {} } }
-
-  #   it "should call the savon client" do
-  #     savon.expects(:call).with(type, opts)
-  #     subject.request(type, opts)
-  #   end
-
-  # end
-
   describe "return value of #namespace" do
 
     it "should not be empty" do

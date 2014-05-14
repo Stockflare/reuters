@@ -1,0 +1,11 @@
+<s:Envelope 
+    xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+    <s:Body>
+        <CreateServiceToken_Response_1 
+            xmlns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" 
+            xmlns:global="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Common_1">
+            <Expiration>2014-05-14T19:05:04.8429795Z</Expiration>
+            <global:Token>92C6ECD09825AC24C977F352FB31F8E4DF10BC84502A1CBDDF4636371E6714BA6DB028EAB6B832398B64AFE7895D53521C7F4CB84AF643D902E7707887C62DBEAF7398A9AB812B817F9C06B476EA6A017B629BE78FB965F4B2B46CCC7BCCF993</global:Token>
+        </CreateServiceToken_Response_1>
+    </s:Body>
+</s:Envelope>

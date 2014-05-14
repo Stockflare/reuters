@@ -1,6 +1,6 @@
 module Reuters
   module Client
-    class Fundamental
+    class Fundamental < Base
 
       def initialize
         @token = Reuters::Client::Token.new

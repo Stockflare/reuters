@@ -72,20 +72,6 @@ module Reuters
         }
       end
 
-      # Determine if the token from the current response
-      # has expired by comparing it to the current time.
-      #
-      # @note If a token has not yet been retrieved from the
-      #       Reuter's api, calling this method will automatically
-      #       attempt to request a token.
-      #
-      # @return [Boolean] false if the token has not
-      #                   expired, true otherwise.
-      def expired?
-        expires_at < Time.now if @response
-        true
-      end
-
       private
 
       def credentials
@@ -93,7 +79,7 @@ module Reuters
       end
 
       def current_response
-        if !expired?
+        if @response && @response.expires_at > Time.now
           @response
         else
           fail 'Token has expired.'

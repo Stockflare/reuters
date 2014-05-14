@@ -2,6 +2,15 @@ module Reuters
   module Response
     class Token
 
+      # @!attribute [r] token
+      #   The token that has been retrieved from the Reuter's API.
+      #   @return [String, Nil] the token contents, or nil if not set.
+
+      # @!attribute [r] expires_at
+      #   The timestamp at which the associated token will expire.
+      #   @return [Time, Nil] the expiry time of the token,
+      #     or nil if not set.
+
       attr_reader :token
 
       attr_reader :expires_at

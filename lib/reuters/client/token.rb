@@ -45,7 +45,7 @@ module Reuters
       delegate :username, :password, :app_id, to: :credentials
 
       # Send a correctly formatted request to the Reuter's
-      # API. This call overloads the basic #request method 
+      # API. This call overloads the basic #request method
       # by making an unauthenticated API call.
       #
       # @note This request method calls the Savon Client #call
@@ -72,17 +72,18 @@ module Reuters
         }
       end
 
-      # Determine if the token from the current response 
+      # Determine if the token from the current response
       # has expired by comparing it to the current time.
       #
-      # @note If a token has not yet been retrieved from the 
+      # @note If a token has not yet been retrieved from the
       #       Reuter's api, calling this method will automatically
       #       attempt to request a token.
       #
-      # @return [Boolean] false if the token has not 
+      # @return [Boolean] false if the token has not
       #                   expired, true otherwise.
       def expired?
-        expires_at < Time.now
+        expires_at < Time.now if @response
+        true
       end
 
       private
@@ -92,10 +93,10 @@ module Reuters
       end
 
       def current_response
-        unless expired?
+        if !expired?
           @response
         else
-          raise 'Token has expired.'
+          fail 'Token has expired.'
         end
       rescue
         authenticate

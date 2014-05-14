@@ -34,10 +34,10 @@ module Reuters
       # @return [Object] The Savon Response object.
       def request(type, opts = {})
         response.new client.call(type, opts.deep_merge(
-          soap_header: { 
+          soap_header: {
             'ApplicationID' => @token.app_id,
             'Token' => @token.token
-          }
+          },
           attributes: { 'xmlns' => namespace.endpoint })).body
       end
 

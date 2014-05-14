@@ -31,9 +31,12 @@ module Reuters
       #
       # @return [Object] The Savon Response object.
       def request(type, opts = {})
-        client.call type, opts.deep_merge(
-          attributes: { 'xmlns' => namespace.endpoint }
-        )
+        response.new client.call(type, opts.deep_merge(
+          soap_header: { 
+            'ApplicationID' => @token.app_id,
+            'Token' => @token.token
+          }
+          attributes: { 'xmlns' => namespace.endpoint })).body
       end
 
       # Retrieves the {Namespaces} module that is associated
@@ -54,6 +57,17 @@ module Reuters
       # @return [Module] the namespace representing this client.
       def wsdl
         Reuters::Wsdls.const_get client_name
+      end
+
+      # Retrieves the response object that is associated
+      # with this client. All calls to the Reuter's API
+      # will initialize a new response object and populate
+      # it with the data in the response.
+      #
+      # @return [Class] the class that will be used to parse
+      #   the response from Reuter's API.
+      def response
+        Reuters::Response.const_get client_name
       end
 
       private

@@ -3,6 +3,7 @@ require 'savon'
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/hash/deep_merge'
+require 'active_support/inflector'
 
 require 'reuters/namespaces'
 require 'reuters/wsdls'
@@ -39,16 +40,16 @@ module Reuters
   #   @return [String] The configured WSDL endpoint.
 
   # Set the default Reuters API namespace endpoint. This is the
-  # standard default for nearly all API requests and shouldn't
+  # standard default for most API requests and shouldn't
   # really need to be changed.
   mattr_accessor :namespaces_endpoint
-  self.namespaces_endpoint = 'http://www.reuters.com/ns/2006/05/01/webservices/rkd'
+  self.namespaces_endpoint = 'http://www.reuters.com/ns'
 
   # Set the default Reuter's API WSDL endpoint. This endpoint
   # sets compatibility for SOAP 1.1 requests and will need to
   # be changed if you wish to use SOAP 1.2 with the Reuter's API.
   mattr_accessor :wsdl_endpoint
-  self.wsdl_endpoint = 'http://api.rkd.reuters.com/schemas/'
+  self.wsdl_endpoint = 'http://api.rkd.reuters.com/schemas'
 
   # Helper to configure the Reuters gem.
   #

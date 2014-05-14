@@ -45,7 +45,8 @@ module Reuters
       delegate :username, :password, :app_id, to: :credentials
 
       # Send a correctly formatted request to the Reuter's
-      # API.
+      # API. This call overloads the basic #request method 
+      # by making an unauthenticated API call.
       #
       # @note This request method calls the Savon Client #call
       #       method.

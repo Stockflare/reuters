@@ -22,7 +22,9 @@ module Reuters
       end
 
       # Send a correctly formatted request to the Reuter's
-      # API.
+      # API. This method makes an authenticated request to
+      # the API, assuming that a token object has been defined
+      # by the extending Class.
       #
       # @note This request method calls the Savon Client #call
       #   method.

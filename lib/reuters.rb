@@ -8,6 +8,7 @@ require 'reuters/namespaces'
 require 'reuters/wsdls'
 require 'reuters/credentials'
 require 'reuters/version'
+require 'reuters/response'
 require 'reuters/client'
 
 # Ruby Gem for interacting with the Thomson Reuters

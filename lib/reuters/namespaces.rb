@@ -1,6 +1,7 @@
 require 'reuters/namespaces/base'
 require 'reuters/namespaces/token'
 require 'reuters/namespaces/common'
+require 'reuters/namespaces/fundamentals'
 
 module Reuters
   # The {Namespaces} module contains sets of endpoints that

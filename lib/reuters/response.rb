@@ -1,5 +1,5 @@
 require 'reuters/response/token'
-require 'reuters/response/fundamental'
+require 'reuters/response/fundamentals'
 
 module Reuters
   module Response

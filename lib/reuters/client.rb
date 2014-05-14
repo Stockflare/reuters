@@ -1,6 +1,6 @@
 require 'reuters/client/base'
 require 'reuters/client/token'
-require 'reuters/client/fundamental'
+require 'reuters/client/fundamentals'
 
 module Reuters
   # Main client for the Reuters Gem. The Client module wraps

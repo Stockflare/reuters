@@ -19,7 +19,7 @@ module Reuters
         #
         # @return [String] the fully resolved namespace endpoint.
         def endpoint
-          "#{Reuters.namespaces_endpoint}/#{name}"
+          "#{Reuters.namespaces_endpoint}/#{year}/#{month}/#{day}/webservices/rkd/#{name}"
         end
 
         # Enables this namespace to be configured by passing in

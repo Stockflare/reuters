@@ -1,9 +1,20 @@
 module Reuters
+  # This class enables the rapid and relatively painless
+  # construction of the body of Reuters API calls.
+  #
+  # It extends the Hash class, which means that it is
+  # compatible with the Savon request call and includes
+  # all the basic functionality of a Hash.
+  #
+  # @note This class is documented with worked examples
+  #  on the main README file.
+  #
+  # @see http://savonrb.com/version2/requests.html
   class Builder < Hash
 
     def initialize(body = {}, &block)
       self[:attributes!] = {}
-      self.attributes body
+      attributes body
       block.call(self) if block
     end
 
@@ -18,19 +29,13 @@ module Reuters
     def method_missing(name, body = nil, camelcase = true, &block)
       key = camelize name
 
-      if name.match /\=$/
+      if name.match(/\=$/)
         assign_val(key, body)
       else
-        case body
-        when Hash
-          self.attributes({ key => body }, camelcase)
-        when Array
-          self[key] ||= Array.new(body.count) { "" }
-          self.attributes(key => order_attributes(body))
-        end
+        assign_body(key, body, camelcase)
       end
 
-      self[key] ||= Reuters::Builder.new &block if block
+      self[key] ||= Reuters::Builder.new(&block) if block
       self[key] ||= Reuters::Builder.new
 
     end
@@ -49,12 +54,22 @@ module Reuters
       self[key] = body
     end
 
-    def order_attributes(attribs) 
-      keys = attribs.collect(&:keys).flatten.uniq
+    def assign_body(key, body, camelcase = true)
+      case body
+      when Hash
+        attributes({ key => body }, camelcase)
+      when Array
+        self[key] ||= Array.new(body.count) { '' }
+        attributes(key => order_attributes(body))
+      end
+    end
+
+    def order_attributes(attribs)
+      keys = attribs.map(&:keys).flatten.uniq
       ordered = {}
       keys.each do |k|
         ordered[k] = []
-        attribs.each { |a| ordered[k] << (a[k].to_s || "") }
+        attribs.each { |a| ordered[k] << (a[k].to_s || '') }
       end
       ordered
     end

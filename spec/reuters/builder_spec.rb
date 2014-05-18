@@ -181,7 +181,7 @@ describe Reuters::Builder do
     end
 
     it "should order the attributes correctly" do
-      expect(@builder[:attributes!]["Test"]["A"]).to eq [1,3]
+      expect(@builder[:attributes!]["Test"]["A"]).to eq ["1","3"]
     end
 
   end

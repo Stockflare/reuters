@@ -7,37 +7,70 @@ shared_examples "a client class" do
 
   it { should respond_to(:request) }
   it { should respond_to(:client) }
-  it { should respond_to(:namespace) }
-  it { should respond_to(:wsdl) }
   it { should respond_to(:operations) }
 
-  describe "return value of #namespace" do
+  it { should respond_to(:before_request) }
+  it { should respond_to(:after_request) }  
 
-    it "should not be empty" do
-      expect(subject.namespace.endpoint).to_not be_empty
+  describe "return value of #response" do
+
+    it "should not raise error" do
+      expect { subject.response }.to_not raise_error
     end
 
-    it "should be a fully resolved namespace" do
-      expect(subject.namespace.endpoint).to include(Reuters.namespaces_endpoint)
+    it "should be a class" do
+      expect(subject.response).to be_a(Class)
     end
 
-    describe "when no namespace is set" do
-      before { subject.stub(:namespace) { nil } }
-      it "should raise an error" do
-        expect { subject.namespace.endpoint }.to raise_error
-      end
+    it "should be a response class" do
+      expect(subject.response.name).to include("Response")
     end
 
   end
 
-  describe "return value of #wsdl" do
-
-    it "should not be empty" do
-      expect(subject.wsdl.endpoint).to_not be_empty
+  describe "return value of #client.operations" do
+    it "should be an Array" do
+      expect(subject.client.operations).to be_a(Array)
     end
 
-    it "should be a fully resolved wsdl" do
-      expect(subject.wsdl.endpoint).to include(Reuters.wsdl_endpoint)
+    it "should not be empty" do
+      expect(subject.client.operations).to_not be_empty
+    end
+  end
+
+  describe "when an operation is called" do
+
+    describe "when the operation does not exist" do
+      it "should raise a no method error" do
+        expect { subject.not_a_valid_op }.to raise_error(NoMethodError)
+      end
+    end
+
+    describe "when the operation exists" do
+
+      let(:test_op) { :test }
+      let(:message) { Reuters::Builder.new }
+
+      before do
+        subject.stub_chain(:client, :operations).and_return([test_op])
+      end
+
+      it "should attempt a request" do
+        subject.should_receive(:request).with(test_op, message)
+        subject.test(message)
+      end
+
+      describe "when additional request attributes are passed" do
+
+        let(:attribs) { {:a => 1, :b => true} }
+
+        it "should pass attributes to the request" do
+          subject.should_receive(:request).with(test_op, message, attribs)
+          subject.test(message, attribs)
+        end
+        
+      end
+
     end
 
   end

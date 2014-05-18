@@ -1,20 +1,20 @@
 module Reuters
   module Client
+    # Performs a Fundamentals Reuters API request. Fundamentals
+    # can be used to retrieve snapshot information about a specific
+    # company ID and Ticker.
+    #
+    # @example Making a fundamentals request
+    #   req = Reuters::Client::Fundamentals.new
+    #   msg = Reuters::Builder.new
+    #   puts req.operations #=> [:get_snapshot_reports_1, ...]
+    #   response = req.get_snapshot_reports_1(msg, {
+    #     'companyId' => id,
+    #     'companyIdType' => type,
+    #     'countryCode' => code,
+    #     'includeMedians' => medians
+    #   })
     class Fundamentals < Base
-
-      def initialize
-        @token = Reuters::Client::Token.new
-      end
-
-      def snapshot(id, type, code, medians = true)
-        @response = request :get_snapshot_reports_1, attributes: {
-          'companyId' => id,
-          'companyIdType' => type,
-          'countryCode' => code,
-          'includeMedians' => medians
-        }
-      end
-
     end
   end
 end

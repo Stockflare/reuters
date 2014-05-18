@@ -8,8 +8,4 @@ describe Reuters::Client::Fundamentals do
 
   it_behaves_like "a client class"
 
-  describe "when #snapshot is called" do
-    pending
-  end
-
 end

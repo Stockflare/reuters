@@ -10,6 +10,16 @@ module Reuters
 
       delegate :operations, to: :client
 
+      delegate :app_id, :token, :header, to: :@token
+
+      # Initialize the base client class and set a token
+      # that can be retrieved upon request.
+      def initialize
+        @wsdl = Reuters::Wsdls.const_get client_name
+        @namespace = Reuters::Namespaces.const_get client_name
+        @token = Reuters::Client::Token.new
+      end
+
       # Retrieves a new instance of a Savon client that
       # has been correctly configured for sending requests
       # to the Reuter's API.
@@ -19,6 +29,17 @@ module Reuters
       # @return [Object] client to make requests through.
       def client
         Savon.client options
+      end
+
+      # Attempts to call an operation for this client through
+      # the determined set of operations that have been retrieved
+      # from the WSDL.
+      def method_missing(op, *args)
+        if client.operations.include?(op)
+          request op, *args
+        else
+          fail NoMethodError, op
+        end
       end
 
       # Send a correctly formatted request to the Reuter's
@@ -31,40 +52,26 @@ module Reuters
       #
       # @see http://savonrb.com/version2/requests.html
       #
-      # @return [Object] The Savon Response object.
-      def request(type, opts = {})
-        response.new client.call(type, opts.deep_merge(
-          soap_header: {
-            'Authorization' => {
-              'ApplicationID' => @token.app_id,
-              'Token' => @token.token  
-            },
-            attributes!: { 'Authorization' => { 
-              'xmlns' => common.endpoint 
-              } 
-            }
-          },
-          attributes: { 'xmlns' => namespace.endpoint })).body
-      end
-
-      # Retrieves the {Namespaces} module that is associated
-      # with this client. The name of client represents the
-      # name of the namespaced module. Ie. {Client::Token} would
-      # have a corresponding {Namespaces::Token} module.
+      # @param [Symbol] type of request to send to Reuters API.
+      # @param [Reuters::Builder] message contents to send to the API.
+      # @param [Hash] attribs to attach to the request object.
+      # @param [Boolean] auth defaults to true if a token is required
+      #                  for this request
       #
-      # @return [Module] the namespace representing this client.
-      def namespace
-        Reuters::Namespaces.const_get client_name
-      end
+      # @return [Object] The corresponding Response object.
+      def request(type, message, attribs = {}, auth = true)
 
-      # Retrieves the {Wsdls} module that is associated
-      # with this client. The name of client represents the
-      # name of the WSDL module. Ie. {Client::Token} would
-      # have a corresponding {Wsdls::Token} module.
-      #
-      # @return [Module] the namespace representing this client.
-      def wsdl
-        Reuters::Wsdls.const_get client_name
+        content = {
+          attributes: attribs.merge('xmlns' => @namespace.endpoint),
+          message: before_request.call(message, type)
+        }
+
+        content[:soap_header] = header if auth
+
+        data = client.call(type, content).body
+
+        response.new after_request.call(data)
+
       end
 
       # Retrieves the response object that is associated
@@ -76,6 +83,38 @@ module Reuters
       #   the response from Reuter's API.
       def response
         Reuters::Response.const_get client_name
+      end
+
+      # Yields a block that is called before a request
+      # is sent to Savon. The hash that is returned from
+      # this block is used as the message part of the
+      # Savon request.
+      #
+      # @note By default this request hook has no effect.
+      #
+      # @yield [req, type] The request object that has been
+      #  sent to the client. The operation name is passed
+      #  as the second parameter.
+      #
+      # @yieldparam req [Reuters::Builder] The request object.
+      # @yieldparam type [Symbol] The intended operation to perform.
+      def before_request(&block)
+        @before_request = block if block
+        @before_request || proc { |a| a }
+      end
+
+      # Yields a block that is called after a successful
+      # request to Reuters. The object that is returned from
+      # this is request is subsequently passed onto this Clients
+      # corresponding response class.
+      #
+      # @note By default this request hook has no effect.
+      #
+      # @yield [req] The raw response object that
+      #              has been received and parsed by Savon.
+      def after_request(&block)
+        @after_request = block if block
+        @after_request || proc { |a| a }
       end
 
       private
@@ -90,11 +129,12 @@ module Reuters
 
       def options
         {
-          wsdl: wsdl.endpoint,
+          wsdl: @wsdl.endpoint,
           ssl_version: :SSLv3,
           namespace_identifier: nil,
           ssl_verify_mode: :none,
-          log: false
+          log: Reuters.debug,
+          pretty_print_xml: true
         }
       end
 

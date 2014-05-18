@@ -44,19 +44,23 @@ module Reuters
 
       delegate :username, :password, :app_id, to: :credentials
 
-      # Send a correctly formatted request to the Reuter's
-      # API. This call overloads the basic #request method
-      # by making an unauthenticated API call.
+      # Override {Base} constructor and avoid setting a token
+      # as it will crash the client.
+      def initialize
+        @wsdl = Reuters::Wsdls.const_get client_name
+        @namespace = Reuters::Namespaces.const_get client_name
+      end
+
+      # Build the authentication message that will be sent to Reuters.
       #
-      # @note This request method calls the Savon Client #call
-      #       method.
-      #
-      # @see http://savonrb.com/version2/requests.html
-      #
-      # @return [Object] The Savon Response object.
-      def request(type, opts = {})
-        response.new client.call(type, opts.deep_merge(
-          attributes: { 'xmlns' => namespace.endpoint })).body
+      # @return [Hash] the contents of the body of the message.
+      def message
+        Reuters::Builder.new do |body|
+          body.application_id = app_id
+          body.username = username
+          body.password = password
+          body.application_id({ xmlns: common.endpoint }, false)
+        end
       end
 
       # Authenticates with Reuters and automatically
@@ -64,12 +68,16 @@ module Reuters
       #
       # @return [Token] an initialized instance of {Token}
       def authenticate
-        @response = request :create_service_token_1, message: {
-          'ApplicationID' => app_id,
-          'Username' => username,
-          'Password' => password,
-          :attributes! => { 'ApplicationID' => { 'xmlns' => common.endpoint } }
-        }
+        @response = create_service_token_1(message, {}, false)
+      end
+
+      def header
+        response = current_response
+        Reuters::Builder.new do |body|
+          body.authorization.application_id = app_id
+          body.authorization.token = response.token
+          body.authorization({ 'xmlns' => common.endpoint }, false)
+        end
       end
 
       private

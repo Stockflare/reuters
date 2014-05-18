@@ -18,6 +18,18 @@ module Reuters
       block.call(self) if block
     end
 
+    # Assign element attributes to a specific key inside
+    # the hash. All attributes are assigned to the
+    # 'hidden' :attributes! key.
+    #
+    # @example Adding an attribute
+    #   req = Reuters::Builder.new
+    #   req.attributes(exchange_code: { id: 123 })
+    #
+    # @param [Hash] attribs to add to the attributes! key.
+    # @param [Boolean] camelcase the keys inside the hash?
+    #
+    # @return [Hash] the resulting hash that was added.
     def attributes(attribs, camelcase = true)
       camelize_keys(attribs).each do |key, value|
         hash = camelcase ? camelize_keys(value) : value
@@ -26,6 +38,11 @@ module Reuters
       end
     end
 
+    # Uses the name of the missing method and adds it
+    # as a new key inside this hash. If the method
+    # is called as an assignment, the value will be
+    # set to the element, otherwise a nested {Builder}
+    # is returned.
     def method_missing(name, body = nil, camelcase = true, &block)
       key = camelize name
 
@@ -40,10 +57,22 @@ module Reuters
 
     end
 
+    # Return all keys inside this Hash object except
+    # for the :attributes! key. This key is hidden
+    # so that it cannot be mistaken for an XML Element.
+    #
+    # @return [Array] All keys except for :attributes!
+    #   which will always exist.
     def keys
       super - [:attributes!]
     end
 
+    # Attempts to find a key that exists in the hash.
+    # If the key cannot be found in its current format,
+    # the method attempts to camelcase the key and
+    # search again.
+    #
+    # @return [Boolean] True if the key exists, false otherwise.
     def key?(key)
       super || super(camelize(key))
     end

@@ -10,6 +10,11 @@ module Reuters
       # module that includes this base module.
       module ClassMethods
 
+        # Returns the fully resolved WSDL endpoint for the
+        # including Module.
+        #
+        # @return [String] the fully resolved wsdl endpoint
+        #   (including http://...)
         def endpoint
           "#{Reuters.wsdl_endpoint}/#{name}/wsdl/#{method}"
         end

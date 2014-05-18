@@ -1,5 +1,13 @@
 module Reuters
   module Response
+    # Builds the response received from the Reuters API
+    # for a Token based request. This class will parse
+    # the token contens and the expiry time and skip
+    # any other content in the response.
+    #
+    # @note This class is designed to parse the hash that
+    #   is returned from Savon after a successful request
+    #   to the Reuters API.
     class Token
 
       # @!attribute [r] token

@@ -34,7 +34,7 @@ module Reuters
       # @example Defining a custom namespace
       #   str = Reuters::Namespaces::Search.define(:equity_quote, :query_spec, 1)
       #   puts str #=> "http://.../Search/EquityQuote_QuerySpec_1"
-      # @param [String] *strs to convert into a valid namespace
+      # @param [String] strs to convert into a valid namespace
       #
       # @return [String] A full namespaced endpoint with a underscore
       #   separated camelized definition.

@@ -4,8 +4,6 @@ Uses the [Reuter's TRKD API](http://thomsonreuters.com/knowledge-direct/) to gra
 
 This gem will only work if you have been provided with valid credentials by Reuters. See below for more information about configuring your login credentials.
 
-A dependency on Ruby >= 2.0.0 is also required, due to an issue with SSL Certificates with the Reuter' API in earlier versions.
-
 ## Installation
 
 Add this line to your application's Gemfile:

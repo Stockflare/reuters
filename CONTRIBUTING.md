@@ -1,5 +1,11 @@
 # Contributing to Reuters
 
+The Reuters API is vast and has lots of calls that each vary in complexity and usage. At the moment, we only have limited development time, so have only developed the calls that we use. 
+
+If you would like to develop an API Call, open an issue and please feel free to ask for assistance with building it.
+
+You will find that most classes are well documented and we have designed the gem to be as intuitive and flexible to develop as possible. 
+
 If you find a bug, have a feature request or even want to contribute an enhancement or fix, please follow the below guidelines so that we can help you out and/or get your code merged quickly.
 
 ## If you find what looks like a bug

@@ -1,5 +1,7 @@
 module Reuters
   module Wsdls
+    # Represents the Wsdl endpoint that will be used to
+    # make Fundamentals Reuters API calls.
     module Fundamentals
 
       # @!parse include Base

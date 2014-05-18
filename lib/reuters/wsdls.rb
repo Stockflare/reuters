@@ -1,6 +1,7 @@
 require 'reuters/wsdls/base'
 require 'reuters/wsdls/token'
 require 'reuters/wsdls/fundamentals'
+require 'reuters/wsdls/search'
 
 module Reuters
   # The {Wsdls} module contains sets of endpoints that

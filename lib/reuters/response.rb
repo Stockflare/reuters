@@ -1,8 +1,10 @@
 module Reuters
-  # This module acts as a Namespace for client-based
-  # response classes. For example, the Token client has
-  # a corresponding Token response class, which is used
-  # to automagically parse responses from the Reuters API.
+  # This class parses Savon response bodies into more practical
+  # accessible objects, by using a recursive strategy for parsing
+  # the content. 
+  #
+  # @note All attributes for XML elements can be accessed via the
+  #   attributes accessor.
   class Response < Hash
 
     attr_accessor :body, :attributes

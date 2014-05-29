@@ -1,6 +1,6 @@
 # Thomson Reuters API Client
 
-[![Coverage Status](https://coveralls.io/repos/Stockflare/reuters/badge.png)](https://coveralls.io/r/Stockflare/reuters) [![Build Status](https://travis-ci.org/Stockflare/reuters.svg?branch=master)](https://travis-ci.org/Stockflare/reuters) [![Dependency Status](https://gemnasium.com/Stockflare/reuters.svg)](https://gemnasium.com/Stockflare/reuters) [![Code Climate](https://codeclimate.com/github/Stockflare/reuters.png)](https://codeclimate.com/github/Stockflare/reuters)
+[![Coverage Status](https://coveralls.io/repos/Stockflare/reuters/badge.png?branch=master)](https://coveralls.io/r/Stockflare/reuters?branch=master) [![Build Status](https://travis-ci.org/Stockflare/reuters.svg?branch=master)](https://travis-ci.org/Stockflare/reuters) [![Dependency Status](https://gemnasium.com/Stockflare/reuters.svg)](https://gemnasium.com/Stockflare/reuters) [![Code Climate](https://codeclimate.com/github/Stockflare/reuters.png)](https://codeclimate.com/github/Stockflare/reuters)
 
 
 Uses the [Reuter's TRKD API](http://thomsonreuters.com/knowledge-direct/) to grab financial data for stocks, such as quotes, estimates and snapshots.

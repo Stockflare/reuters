@@ -9,6 +9,18 @@ notifications:
 before_deploy:
 - yard doc
 deploy:
+- provider: s3
+  access_key_id: AKIAIWPY43DAALLVSXFQ
+  bucket: reuters.stockflair.com
+  skip_cleanup: true
+  local-dir: doc
+  edge: true
+  region: us-east-1
+  endpoint: s3-us-east-1.amazonaws.com
+  on:
+    branch: master
+  secret_access_key:
+    secure: BS3KV3AbGIxzwmEA53iceavyM6MWuDImiAeIRN0CTiT3yCOsD8m5M8dzB1Uxx0nOQNj3W47ywpD2PDciEyr8RnEjMpLSPfEe1/bBJuiWUGDI5x2w2dg5M02/kJLMS3hFVbEvdoCN2owKpWA4Gm95JvkeWH8eL3JWIi7sxHC+Kxw=
 - provider: rubygems
   on:
     branch: master

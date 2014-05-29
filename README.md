@@ -1,5 +1,7 @@
 # Thomson Reuters API Client
 
+[![Coverage Status](https://coveralls.io/repos/Stockflare/reuters/badge.png)](https://coveralls.io/r/Stockflare/reuters) 
+
 Uses the [Reuter's TRKD API](http://thomsonreuters.com/knowledge-direct/) to grab financial data for stocks, such as quotes, estimates and snapshots.
 
 This gem will only work if you have been provided with valid credentials by Reuters. See below for more information about configuring your login credentials.

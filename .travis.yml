@@ -3,6 +3,9 @@ rvm:
 - 2.0.0-p353
 - 2.1.0
 - ruby-head
+notifications:
+  flowdock:
+    secure: LiGQvTUtEQyFRdM/nIDrzFI7aP5VGymCSGwrOFJ/ej//kiMc4fwjJqA+OD9JHT6bnBHx7BkFqXOMRIOBvxE2v5t0phmNJkEI9wc2Jiq6o9kdhMfVg9IQ8NTNdWK6cRqyfs96mLjFzweN+kUp6UnU/s9iXsU5XdOLYeklkC2U/sI=
 before_deploy:
 - yard doc
 deploy:
@@ -10,4 +13,4 @@ deploy:
   on:
     branch: master
   api_key:
-    secure: Kkwrzg+2dJrrShwVceco8EEP8Kc9BsKvDWIK6pFrdalZRY4sDG7BC7phPOmQPW40Qvl9f3qaZFjpohN0/QLDlF48Zg2AUBGuKfWpQ7V+dTL7hd6ZewFEs/5vyoofEf7BkSE9NFrsuOymEtHH+MJjqY+aIFg4YrNRcoEvCFuEZRk=
+    secure: cDRvAU7Beo+0BNfgbAcyPvaTtR4yv539sm7Lkx0HOUMi+O9L/qhQgCCzacIwUeEAf5kPj9m7HSW5BzLddiOZlQ/rQLFOSctmzeF5Swj/oQZ6OqQDhvjjtazMrNiNvNvGmchbeEBdQw46q/aaAgHsvXWNtEjYES+4+3A8YVtCn+Q=

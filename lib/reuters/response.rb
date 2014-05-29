@@ -1,12 +1,31 @@
-require 'reuters/response/token'
-require 'reuters/response/fundamentals'
-require 'reuters/response/search'
-
 module Reuters
   # This module acts as a Namespace for client-based
   # response classes. For example, the Token client has
   # a corresponding Token response class, which is used
   # to automagically parse responses from the Reuters API.
-  module Response
+  class Response < Hash
+
+    attr_accessor :body, :attributes
+
+    def initialize(body = {})
+      unless body.empty?
+        merge! body
+        attribs = body.keep_if { |k| k.match /@/ }
+        attribs = Hash[attribs.map { |k,v| [k.to_s.gsub(/@/,'').to_sym, v] }]
+        @attributes = self.class.new attribs
+      end
+    end
+
+    def method_missing(name, *a)
+      if key?(name)
+        val = self[name]
+        unless val.is_a? String
+          self.class.new val
+        else
+          val
+        end
+      end
+    end
+
   end
 end

@@ -70,19 +70,8 @@ module Reuters
 
         data = client.call(type, content).body
 
-        response.new after_request.call(data)
+        Reuters::Response.new after_request.call(data[data.keys.first])
 
-      end
-
-      # Retrieves the response object that is associated
-      # with this client. All calls to the Reuter's API
-      # will initialize a new response object and populate
-      # it with the data in the response.
-      #
-      # @return [Class] the class that will be used to parse
-      #   the response from Reuter's API.
-      def response
-        Reuters::Response.const_get client_name
       end
 
       # Yields a block that is called before a request

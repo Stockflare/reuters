@@ -17,7 +17,7 @@ module Reuters
       #   The token that has been retrieved from the Reuter's API.
       #   @return [String, Nil] the token contents, or nil if not set.
 
-      # @!attribute [r] expires_at
+      # @!attribute [r] expiration
       #   The timestamp at which the associated token will expire.
       #   @return [Integer, Nil] the expiry time of the token,
       #     or nil if not set.
@@ -40,7 +40,7 @@ module Reuters
       #   @return [String, Nil] the application id, or nil if one has
       #     not been configured.
 
-      delegate :token, :expires_at, to: :current_response
+      delegate :token, :expiration, to: :current_response
 
       delegate :username, :password, :app_id, to: :credentials
 
@@ -87,7 +87,7 @@ module Reuters
       end
 
       def current_response
-        if @response && @response.expires_at > Time.now
+        if @response && Time.parse(@response.expiration) > Time.now
           @response
         else
           fail 'Token has expired.'

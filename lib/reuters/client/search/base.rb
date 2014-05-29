@@ -13,13 +13,6 @@ module Reuters
           @token = Reuters::Client::Token.new
         end
 
-        # Override the basic Client response method to
-        # scope any retrieved response class to the 
-        # {Reuters::Reponse::Search} module.
-        def response
-          Reuters::Response::Search.const_get client_name
-        end
-
         private
 
         def ns_definition(*args)

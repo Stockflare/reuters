@@ -12,22 +12,6 @@ shared_examples "a client class" do
   it { should respond_to(:before_request) }
   it { should respond_to(:after_request) }  
 
-  describe "return value of #response" do
-
-    it "should not raise error" do
-      expect { subject.response }.to_not raise_error
-    end
-
-    it "should be a class" do
-      expect(subject.response).to be_a(Class)
-    end
-
-    it "should be a response class" do
-      expect(subject.response.name).to include("Response")
-    end
-
-  end
-
   describe "return value of #client.operations" do
     it "should be an Array" do
       expect(subject.client.operations).to be_a(Array)

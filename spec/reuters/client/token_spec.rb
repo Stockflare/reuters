@@ -9,7 +9,7 @@ describe Reuters::Client::Token do
   it_behaves_like "a client class"
 
   it { should respond_to(:token) }
-  it { should respond_to(:expires_at) }
+  it { should respond_to(:expiration) }
 
   it { should respond_to(:username) }
   it { should respond_to(:password) }
@@ -67,7 +67,7 @@ describe Reuters::Client::Token do
       before { savon.expects(:create_service_token_1).with(message: :any).returns(test_response) }
 
       it "should return a token response object" do
-        expect(@token.authenticate).to be_a(Reuters::Response::Token)
+        expect(@token.authenticate).to be_an_instance_of Reuters::Response
       end
 
       it "authenticates the user with Reuters API" do

@@ -36,7 +36,7 @@ Reuters.configure do |config|
     login.password = "my_super_secret_password"
 
     # Set application ID
-    login.application_id = "application_id"
+    login.app_id = "application_id"
   end
 
 end

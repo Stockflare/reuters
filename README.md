@@ -1,6 +1,6 @@
 # Thomson Reuters API Client
 
-[![Coverage Status](https://coveralls.io/repos/Stockflare/reuters/badge.png?branch=master)](https://coveralls.io/r/Stockflare/reuters?branch=master) [![Build Status](https://travis-ci.org/Stockflare/reuters.svg?branch=master)](https://travis-ci.org/Stockflare/reuters) [![Dependency Status](https://gemnasium.com/Stockflare/reuters.svg)](https://gemnasium.com/Stockflare/reuters) [![Code Climate](https://codeclimate.com/github/Stockflare/reuters.png)](https://codeclimate.com/github/Stockflare/reuters)
+[![Coverage Status](https://coveralls.io/repos/Stockflare/reuters/badge.png?branch=master)](https://coveralls.io/r/Stockflare/reuters?branch=master) [![Build Status](https://travis-ci.org/Stockflare/reuters.svg?branch=master)](https://travis-ci.org/Stockflare/reuters) [![Dependency Status](https://gemnasium.com/Stockflare/reuters.svg)](https://gemnasium.com/Stockflare/reuters) [![Code Climate](https://codeclimate.com/github/Stockflare/reuters.png)](https://codeclimate.com/github/Stockflare/reuters) [![Gem Version](https://badge.fury.io/rb/reuters.svg)](http://badge.fury.io/rb/reuters)
 
 
 Uses the [Reuter's TRKD API](http://thomsonreuters.com/knowledge-direct/) to grab financial data for stocks, such as quotes, estimates and snapshots.
@@ -202,8 +202,8 @@ Different Response classes parse data slightly differently depending on how it i
 
 ## Contributing
 
-The Reuters API is vast and has lots of calls that each vary in complexity and usage. At the moment, we only have limited development time, so have only developed the calls that we use. 
+The Reuters API is vast and has lots of calls that each vary in complexity and usage. At the moment, we only have limited development time, so have only developed the calls that we use.
 
-If you would like to develop an API Call, open an issue and please feel free to ask for assistance with building it. 
+If you would like to develop an API Call, open an issue and please feel free to ask for assistance with building it.
 
 If you find a bug, have a feature request or even want to contribute an enhancement or fix, please follow the contributing guidelines included in the repository.

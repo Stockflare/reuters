@@ -22,7 +22,7 @@ describe Reuters::Client::Search::Equity do
     end
 
     it "should include the camelcased data type" do
-      expect(@equity.data_type).to include("QuerySpecDataTypes")
+      expect(@equity.data_type).to include("QuerySpecDatatypes")
     end
 
   end
@@ -42,5 +42,5 @@ describe Reuters::Client::Search::Equity do
     end
 
   end
-  
+
 end

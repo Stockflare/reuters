@@ -46,7 +46,7 @@ module Reuters
         #
         # @return [String] the fully resolved namespace endpoint.
         def data_type
-          ns_definition(:query_spec_data_types)
+          ns_definition(:query_spec_datatypes)
         end
 
         # Retrieve the correctly formatted Namespace Query

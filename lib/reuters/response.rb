@@ -1,7 +1,7 @@
 module Reuters
   # This class parses Savon response bodies into more practical
   # accessible objects, by using a recursive strategy for parsing
-  # the content. 
+  # the content.
   #
   # @note All attributes for XML elements can be accessed via the
   #   attributes accessor.
@@ -20,8 +20,13 @@ module Reuters
 
     def method_missing(name)
       if key?(name)
-        if (val = self[name]).is_a? String
-          val
+        val = self[name]
+        case val
+        when String then val
+        when Array
+          val.collect do |v|
+            self.class.new v
+          end
         else
           self.class.new val
         end

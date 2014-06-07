@@ -9,19 +9,39 @@ describe Reuters::Response do
         name: {
           full_name: "ABC Solutions Ltd.",
           short_name: "ABC Ltd."
-        }
+        },
+        list: [
+          { fruit: "apple" },
+          { fruit: "banana" }
+        ]
       },
       :@type => "ORD"
     }
   }
 
-  before do 
+  before do
     @response = Reuters::Response.new(test_hash)
   end
 
   subject { @response }
 
   it { should respond_to(:attributes) }
+
+  describe "when a value is an array" do
+
+    it "should return an array" do
+      expect(@response.info.list).to be_a Array
+    end
+
+    it "should contain an array of Response objects" do
+      expect(@response.info.list.first).to be_an_instance_of Reuters::Response
+    end
+
+    it "should access nested array response objects" do
+      expect(@response.info.list.first.fruit).to eq "apple"
+    end
+
+  end
 
   describe "a nested response object" do
 

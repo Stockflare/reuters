@@ -22,13 +22,14 @@ module Reuters
       if key?(name)
         val = self[name]
         case val
-        when String then val
         when Array
           val.collect do |v|
             self.class.new v
           end
-        else
+        when Hash
           self.class.new val
+        else
+          val
         end
       end
     end

@@ -6,6 +6,8 @@ describe Reuters::Response do
     {
       info: {
         ticker: "ABC",
+        number: 1,
+        boolean: false,
         name: {
           full_name: "ABC Solutions Ltd.",
           short_name: "ABC Ltd."
@@ -26,6 +28,18 @@ describe Reuters::Response do
   subject { @response }
 
   it { should respond_to(:attributes) }
+
+  describe "when a value is mixed type" do
+
+    it "should return a number" do
+      expect(@response.info.number).to eq 1
+    end
+
+    it "should a boolean" do
+      expect(@response.info.boolean).to eq false
+    end
+
+  end
 
   describe "when a value is an array" do
 

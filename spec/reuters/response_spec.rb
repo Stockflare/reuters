@@ -73,6 +73,11 @@ describe Reuters::Response do
       expect(@response.info).to be_an_instance_of Reuters::Response
     end
 
+    it "should return the same nested object twice" do
+      expected_info = @response.info
+      expect(@response.info).to eq expected_info
+    end
+
     it "should include a nested key" do
       expect(@response.info.keys).to include :ticker
     end

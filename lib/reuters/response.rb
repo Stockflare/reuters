@@ -29,9 +29,9 @@ module Reuters
     def determine_value(val)
       case val
       when Array
-        val.collect { |v| determine_value v }
+        val.dup.collect { |v| determine_value v }
       when Hash
-        self.class.new val
+        self.class.new val.dup
       else
         val
       end

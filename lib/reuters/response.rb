@@ -19,8 +19,8 @@ module Reuters
     end
 
     def method_missing(name)
-      if key?(name)
-        val = self[name]
+      if key?((key = name)) || key?((key = name.to_s))
+        val = self[key]
         case val
         when Array
           val.collect do |v|

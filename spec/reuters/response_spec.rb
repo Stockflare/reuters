@@ -4,6 +4,7 @@ describe Reuters::Response do
 
   let(:test_hash) {
     {
+      "character" => "hodor",
       info: {
         ticker: "ABC",
         number: 1,
@@ -15,7 +16,8 @@ describe Reuters::Response do
         list: [
           { fruit: "apple" },
           { fruit: "banana" }
-        ]
+        ],
+
       },
       :@type => "ORD"
     }
@@ -28,6 +30,14 @@ describe Reuters::Response do
   subject { @response }
 
   it { should respond_to(:attributes) }
+
+  describe "when a key is mixed type" do
+
+    it "should return the correct value regardless" do
+      expect(@response.character).to eq "hodor"
+    end
+
+  end
 
   describe "when a value is mixed type" do
 

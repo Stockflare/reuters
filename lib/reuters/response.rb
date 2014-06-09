@@ -20,19 +20,23 @@ module Reuters
 
     def method_missing(name)
       if key?((key = name)) || key?((key = name.to_s))
-        val = self[key]
-        case val
-        when Array
-          val.collect do |v|
-            self.class.new v
-          end
-        when Hash
-          self.class.new val
-        else
-          val
-        end
+        determine_value self[key]
       end
     end
+
+    private
+
+    def determine_value(val)
+      case val
+      when Array
+        val.collect { |v| determine_value v }
+      when Hash
+        self.class.new val
+      else
+        val
+      end
+    end
+
 
   end
 end

@@ -3,6 +3,9 @@ module Reuters
     # Retrieves a new Token from the Reuter's API using the
     # credentials that have been globally configured.
     #
+    # @note A retrieved token is stored as a static variable, attached to
+    #   this class. It will only be retrieved once, and then again up expiry.
+    #
     # @example Retrieving a new token
     #   Reuters::Credentials.configure do |c|
     #     c.username = 'username'
@@ -68,7 +71,7 @@ module Reuters
       #
       # @return [Token] an initialized instance of {Token}
       def authenticate
-        @response = create_service_token_1(message, {}, false)
+        @@response = create_service_token_1(message, {}, false)
       end
 
       def header
@@ -87,8 +90,8 @@ module Reuters
       end
 
       def current_response
-        if @response && Time.parse(@response.expiration) > Time.now
-          @response
+        if @@response && Time.parse(@@response.expiration) > Time.now
+          @@response
         else
           fail 'Token has expired.'
         end

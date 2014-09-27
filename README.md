@@ -199,6 +199,9 @@ client.get_equity_quote_1(message)
 
 Different Response classes parse data slightly differently depending on how it is intended to be used. You will need to take a look at the documentation for the Response corresponding to your Client.
 
+## Known Issues
+
+* The Wasabi gem at version 3.3.1 causes a bug when the Reuters WSDL is parsed, effectively breaking all communication with Reuters. [Fixed]
 
 ## Contributing
 

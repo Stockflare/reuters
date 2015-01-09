@@ -1,4 +1,5 @@
 require 'reuters/wsdls/search/equity'
+require 'reuters/wsdls/search/all'
 
 module Reuters
   module Wsdls

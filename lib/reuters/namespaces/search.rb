@@ -1,4 +1,5 @@
 require 'reuters/namespaces/search/equity'
+require 'reuters/namespaces/search/all'
 
 module Reuters
   module Namespaces

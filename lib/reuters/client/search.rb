@@ -1,5 +1,6 @@
 require 'reuters/client/search/base'
 require 'reuters/client/search/equity'
+require 'reuters/client/search/all'
 
 module Reuters
   module Client

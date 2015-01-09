@@ -30,15 +30,17 @@ describe Reuters::Builder do
 
     before do
       @builder.hold_key
-      @builder.attributes(hold_key: { "test_build" => "Type" })
+      @builder.business_entity(include: true).string_value(value: "QUOTE.FUND", negated: false)
+      @builder.attributes({ business_entity: { 'xmlns' => "http://test" } }, false)
+      # @builder.attributes(hold_key: { "test_build" => "Type" })
     end
 
     it "should allow camelcase keys" do
-      expect(@builder.attribute_key?(:hold_key, "TestBuild")).to be_true
+      expect(@builder.attribute_key?(:business_entity, "Include")).to be_true
     end
 
     it "should allow underscore keys" do
-      expect(@builder.attribute_key?(:hold_key, :test_build)).to be_true
+      expect(@builder.attribute_key?(:business_entity, 'xmlns')).to be_true
     end
 
   end

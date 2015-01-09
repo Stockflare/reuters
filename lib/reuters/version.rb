@@ -2,5 +2,5 @@
 # Knowledge Direct API.
 module Reuters
   # Current version of the Reuters gem.
-  VERSION = '0.9.2'
+  VERSION = '0.9.3'
 end

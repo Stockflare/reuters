@@ -85,7 +85,7 @@ module Reuters
     # @return [Boolean] True if the key exists, false otherwise
     def attribute_key?(key, attr_key)
       attrs = attribute_keys(key)
-      attrs.include?(camelize(attr_key) || attrs.include?(attr_key)) 
+      attrs.include?(camelize(attr_key)) || attrs.include?(attr_key)
     end
 
     # Returns all keys inside the attributes hash.

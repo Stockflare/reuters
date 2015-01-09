@@ -26,9 +26,15 @@ module Reuters
                 sec = req.send(section)
 
                 sec.keys.each do |key|
-                  sec.attributes({ key => { 'xmlns' => query_spec } }, false)
+                  # injext xmlns property only if it does not already exist
+                  unless sec.attribute_key? key, 'xmlns'
+                    sec.attributes({ key => { 'xmlns' => query_spec } }, false)
+                  end
                   sec[key].keys.each do |type|
-                    sec[key].attributes({ type => { 'xmlns' => data_type } }, false)
+                    # injext xmlns property only if it does not already exist
+                    unless sec[key].attribute_key? type, 'xmlns'
+                      sec[key].attributes({ type => { 'xmlns' => data_type } }, false)
+                    end
                   end
                 end
 

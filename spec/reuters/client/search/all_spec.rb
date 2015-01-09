@@ -30,7 +30,6 @@ describe Reuters::Client::Search::All do
   describe "return value of #query_spec" do
 
     it "should be a string" do
-      puts subject.operations.inspect
       expect(subject.query_spec).to be_a(String)
     end
 

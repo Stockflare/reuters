@@ -77,6 +77,24 @@ module Reuters
       super || super(camelize(key))
     end
 
+    # Attempts to find a key that exists within the attributes hash.
+    # If the key cannot be found in its current format,
+    # the method attempts to camelcase the key and
+    # search again.
+    #
+    # @return [Boolean] True if the key exists, false otherwise
+    def attribute_key?(key, attr_key)
+      attrs = attribute_keys(key)
+      attrs.include?(camelize(attr_key) || attrs.include?(attr_key)) 
+    end
+
+    # Returns all keys inside the attributes hash.
+    #
+    # @return [Array] All attribute keys.
+    def attribute_keys(key)
+      (self[:attributes!][camelize(key)] || {}).keys
+    end
+
     private
 
     def assign_val(key, body)

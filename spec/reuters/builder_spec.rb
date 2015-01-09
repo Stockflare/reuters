@@ -26,7 +26,45 @@ describe Reuters::Builder do
     expect(b).to include("TestMethod")
   end
 
+  describe "return value of #attribute_key?" do
+
+    before do
+      @builder.hold_key
+      @builder.attributes(hold_key: { "test_build" => "Type" })
+    end
+
+    it "should allow camelcase keys" do
+      expect(@builder.attribute_key?(:hold_key, "TestBuild")).to be_true
+    end
+
+    it "should allow underscore keys" do
+      expect(@builder.attribute_key?(:hold_key, :test_build)).to be_true
+    end
+
+  end
+
+  describe "return value of #attribute_keys" do
+
+    before do
+      @builder.hold_key
+      @builder.attributes(hold_key: { "test_build" => "Type" })
+      @builder.attributes({ hold_key: { "xml_ns" => "Type" } }, false)
+    end
+
+    subject { @builder.attribute_keys(:hold_key) }
+
+    it { should include "TestBuild", "xml_ns" }
+
+    it { should_not include :attributes! }
+
+    it { should_not be_empty }
+
+    specify { expect { @builder.attributes(hold_key: { "t" => "a" }) }.to change { @builder.attribute_keys(:hold_key) } }
+
+  end
+
   describe "return value of #keys" do
+
     before do
       @builder.foo_test
       @builder.bar_test
